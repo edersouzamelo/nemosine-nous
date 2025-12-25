@@ -1,3 +1,5 @@
+from core import core
+
 def main():
     print("Nemosine Nous iniciado")
 
