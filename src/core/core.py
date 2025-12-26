@@ -1,21 +1,28 @@
-from config import settings
-from services.state import get_state, get_previous_state, set_state
-from services import lifecycle
+from services import lifecycle, state
+from config.settings import VERSION
 
 def init(ticks=1):
-    print(f"{settings.SYSTEM_NAME} v{settings.SYSTEM_VERSION}")
+    print(f"Nemosine Nous v{VERSION}")
 
-    print(f"Previous state: {get_previous_state()}")
-    print(f"Current state: {get_state()}")
+    previous = None
+    current = state.BOOTING
+    print(f"Previous state: {previous}")
+    print(f"Current state: {current}")
 
-    set_state("READY")
-
-    print(f"Previous state: {get_previous_state()}")
-    print(f"Current state: {get_state()}")
+    previous, current = state.transition(previous, current)
+    print(f"Previous state: {previous}")
+    print(f"Current state: {current}")
 
     for _ in range(ticks):
-        lifecycle.tick()
+        lifecycle.tick(current)
+
+    print("Eventos registrados:")
+    for event in lifecycle.get_events():
+        print(event)
 
     print("Core inicializado")
+
+
+
 
 
