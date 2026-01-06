@@ -26,4 +26,10 @@ def set_state(new_state):
     SYSTEM_STATE = new_state
     return True
 
+def transition(new_state):
+    """
+    Placeholder explícito para transição de estado.
+    Implementação real será feita no ciclo de runtime mínimo.
+    """
+    raise NotImplementedError("state.transition() not implemented yet — PREP stub")
 
